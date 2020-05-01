@@ -7,19 +7,20 @@
       @keyup.enter="onSubmit"
       class="add-input"
     />
+
     <button type="submit" @click="onSubmit" class="add-btn">Добавить</button>
     <button class="sort" @click="ON_SORT">Сортировка</button>
   </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import { mapActions } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 export default {
   data: () => ({
-    title: ""
+    title: "",
+    filter: "all"
   }),
-
+  computed: {},
   methods: {
     ...mapActions(["createTodo"]),
     ...mapMutations(["CREATE_TODO", "ON_SORT"]),

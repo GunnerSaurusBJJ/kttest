@@ -2,7 +2,11 @@ export default {
   state: {
     todos: JSON.parse(localStorage.getItem("todos")) || [],
   },
-
+  getters: {
+    allTodos(state) {
+      return state.todos;
+    },
+  },
   mutations: {
     CREATE_TODO(state, newTodo) {
       state.todos.push(newTodo);
@@ -25,11 +29,6 @@ export default {
 
     removeTodo({ commit }, id) {
       commit("REMOVE_TODO", id);
-    },
-  },
-  getters: {
-    allTodos(state) {
-      return state.todos;
     },
   },
 };
