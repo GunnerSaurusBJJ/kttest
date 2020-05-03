@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="paginatedData.length">
-      <li v-for="todo in paginatedData" :key="todo.id" class="todo-li">
+    <div v-if="allPages.length">
+      <li v-for="todo in allPages" :key="todo.id" class="todo-li">
         <span v-bind:class="{done:todo.completed,active:todo.completed}">
           <button class="change" @click="todo.completed = !todo.completed"></button>
           {{todo.title}}
@@ -10,8 +10,8 @@
       </li>
     </div>
     <p v-else>Нет задач</p>
-    <button @click="prevPage" :disabled="pageNumber == 0" class="page prev"></button>
-    <button @click="nextPage" :disabled="pageNumber >= pageCount -1" class="page next"></button>
+    <button @click="toLeft" :disabled="pageNumber == 0" class="page prev"></button>
+    <button @click="toRight" :disabled="pageNumber >= pageCount -1" class="page next"></button>
   </div>
 </template>
 
@@ -20,18 +20,18 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data: () => ({
     pageNumber: 0,
-    size: 10
+    sizeOnPage: 10
   }),
   computed: {
     ...mapGetters(["allTodos"]),
-    paginatedData() {
-      const start = this.pageNumber * this.size,
-        end = start + this.size;
+    allPages() {
+      const start = this.pageNumber * this.sizeOnPage,
+        end = start + this.sizeOnPage;
       return this.allTodos.slice(start, end);
     },
     pageCount() {
       const todosLength = this.allTodos.length,
-        todosSize = this.size;
+        todosSize = this.sizeOnPage;
       return Math.ceil(todosLength / todosSize);
     }
   },
@@ -40,10 +40,10 @@ export default {
     onDelete(id) {
       this.$store.dispatch("removeTodo", id);
     },
-    nextPage() {
+    toRight() {
       this.pageNumber++;
     },
-    prevPage() {
+    toLeft() {
       this.pageNumber--;
     }
   }
