@@ -108,6 +108,7 @@ span {
   margin-left: 10px;
   padding: 5px 7px;
 }
+
 .page:hover {
   background: #ccc;
   cursor: pointer;
@@ -120,5 +121,10 @@ span {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+}
+@media (max-width: 360px) {
+  .page {
+    margin-left: 6px;
+  }
 }
 </style>
