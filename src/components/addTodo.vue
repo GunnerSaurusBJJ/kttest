@@ -31,7 +31,7 @@ export default {
         completed: false
       };
       if (this.title.trim()) {
-        this.CREATE_TODO(newTodo);
+        this.createTodo(newTodo);
       }
       this.title = "";
     }
